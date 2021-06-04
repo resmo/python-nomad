@@ -46,8 +46,7 @@ class Allocation(Requester):
 
     def get_allocation(self, id):
         """ Query a specific allocation.
-
-           https://www.nomadproject.io/docs/http/alloc.html
+            https://www.nomadproject.io/docs/http/alloc.html
 
             returns: dict
             raises:
@@ -59,8 +58,10 @@ class Allocation(Requester):
     def stop_allocation(self, id):
         """ Stop a specific allocation.
 
-           https://www.nomadproject.io/api-docs/allocations/#stop-allocation
+            https://www.nomadproject.io/api-docs/allocations/#stop-allocation
 
+            arguments:
+              - id
             returns: dict
             raises:
               - nomad.api.exceptions.BaseNomadException
