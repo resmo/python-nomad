@@ -67,3 +67,36 @@ class Allocation(Requester):
               - nomad.api.exceptions.URLNotFoundNomadException
         """
         return self.request(id, "stop", method="post").json()
+
+    def restart_allocation(self, id):
+        """ Stop a specific allocation.
+
+            https://www.nomadproject.io/api-docs/allocations#restart-allocation
+
+            arguments:
+              - id
+            returns: dict
+            raises:
+              - nomad.api.exceptions.BaseNomadException
+              - nomad.api.exceptions.URLNotFoundNomadException
+        """
+        return self.request(id, "restart", method="post").json()
+
+    def signal_allocation(self, id, signal, task=None):
+        """ Sends a signal to an allocation or task.
+
+            https://www.nomadproject.io/api-docs/allocations#signal-allocation
+
+            arguments:
+              - id
+              - signal (str)
+            optional_arguments:
+              - task: (str) Optional, if omitted, the signal will be sent to all tasks in the allocation.
+
+            returns: dict
+            raises:
+              - nomad.api.exceptions.BaseNomadException
+              - nomad.api.exceptions.URLNotFoundNomadException
+        """
+        dispatch_json = {"Signal": signal, "Task": task}
+        return self.request(id, "signal", json=dispatch_json, method="post").json()
